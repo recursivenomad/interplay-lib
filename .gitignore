@@ -1,0 +1,9 @@
+# Project
+# -------
+
+# Misc intermediary/meta files
+.temp/
+.tmp/
+
+# Release files
+releases/
