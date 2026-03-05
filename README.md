@@ -48,8 +48,8 @@ So long as you respect the intellectual property notice above, feel free to cont
 ***Plans***
 ===========
 
-- [ ] Obtain the first wave of LEGO® SMART Play™ sets for observation and study  
-  *(pre-orders ship March 1st, 2026)*
+- [x] ~~Obtain the first wave of LEGO® SMART Play™ sets for observation and study~~  
+  *~~(pre-orders ship March 1st, 2026)~~*
 - [ ] Observe & document existing NFC communications in this initial release:
 - [ ] Determine whether identical tags share identical NFC data
 - [ ] Confirm that isolating identical NFC data results in identical SMART Brick behaviour  
