@@ -2,7 +2,7 @@
 ===================================================
 
 
-### *Unofficial interoperability layer for use with LEGO® SMART Play™ NFC protocols*
+### *Unofficial NFC library for interoperability with LEGO® SMART Play™ hardware*
 
 
 [![](../../../gitlab-redirect/raw/main/redirect.png)][URL-Repository]
@@ -50,7 +50,9 @@ So long as you respect the intellectual property notice above, feel free to cont
 
 - [x] ~~Obtain the first wave of LEGO® SMART Play™ sets for observation and study~~  
   *~~(pre-orders ship March 1st, 2026)~~*
-- [ ] Observe & document existing NFC communications in this initial release:
+- [ ] Observe & document existing NFC communications in this initial release  
+  *~~(Chameleon Ultra did not support ISO 15693)~~*  
+  *(Proxmark3 expected to arrive by 13 March, 2026...)*
 - [ ] Determine whether identical tags share identical NFC data
 - [ ] Confirm that isolating identical NFC data results in identical SMART Brick behaviour  
   *ie. establish that NFC data itself is the only variable in this protocol*
@@ -72,6 +74,14 @@ So long as you respect the intellectual property notice above, feel free to cont
 > - https://www.wired.com/story/exclusive-inside-look-at-new-lego-smart-brick/
 > - https://www.lego.com/smart-play/article/innovation
 > - https://www.lego.com/live/smart-play
+
+> Additional research & teardowns:
+> *(Waiting to include other NFC-related research projects until this project establishes its initial findings)*
+> - https://www.youtube.com/watch?v=VcAytfrHL20
+> - https://www.reddit.com/r/LegoSmartBrick/comments/1rkkojk/  
+>   *(contains LLM summary, watch out for hallucinations)*
+> - https://blog.adafruit.com/2026/03/06/some-lego-smart-brick-ble-reverse-engineering/  
+>   *(feels like LLM composition - assume some hallucinations)*
 
 > Other official LEGO® web pages:
 > - https://www.lego.com/aboutus/news/2026/december/lego-smart-play-announcement
