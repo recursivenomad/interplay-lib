@@ -5,6 +5,9 @@
 ### *Unofficial NFC library for interoperability with LEGO® SMART Play™ hardware*
 
 
+### [Issues](https://gitlab.com/recursivenomad/interplay-lib/-/issues) | [Merge requests](https://gitlab.com/recursivenomad/interplay-lib/-/merge_requests) | [Releases](https://gitlab.com/recursivenomad/interplay-lib/-/releases)
+
+
 [![](../../../gitlab-redirect/raw/main/redirect.png)][URL-Repository]
 
 
