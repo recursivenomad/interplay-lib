@@ -55,7 +55,7 @@ So long as you respect the intellectual property notice above, feel free to cont
   *~~(pre-orders ship March 1st, 2026)~~*
 - [ ] Observe & document existing NFC communications in this initial release  
   *~~(Chameleon Ultra did not support ISO 15693)~~*  
-  *(Proxmark3 expected to arrive by 13 March, 2026...)*
+  *~~(Proxmark3 expected to arrive by 13 March, 2026...)~~*
 - [ ] Determine whether identical tags share identical NFC data
 - [ ] Confirm that isolating identical NFC data results in identical SMART Brick behaviour  
   *ie. establish that NFC data itself is the only variable in this protocol*
