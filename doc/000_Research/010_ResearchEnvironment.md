@@ -16,4 +16,4 @@ This research environment consists of:
 
 > ### Failed attempts
 >
-> - The [Chameleon Ultra](https://github.com/RfidResearchGroup/ChameleonUltra) does not have firmware/codec support for the ISO 15693 standard that the SMART Tags appear to use. *(ISO 15693 confirmed via smartphone [NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc) and [NFC TagInfo by NXP](https://play.google.com/store/apps/details?id=com.nxp.taginfolite))*
+> - The [Chameleon Ultra](https://github.com/RfidResearchGroup/ChameleonUltra) does not have firmware/codec support for the ISO 15693 standard that the SMART Tags appear to use. *(ISO 15693 initially confirmed via smartphone [NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc) and [NFC TagInfo by NXP](https://play.google.com/store/apps/details?id=com.nxp.taginfolite))*

@@ -53,7 +53,7 @@ So long as you respect the intellectual property notice above, feel free to cont
 
 - [x] ~~Obtain the first wave of LEGO® SMART Play™ sets for observation and study~~  
   *~~(pre-orders ship March 1st, 2026)~~*
-- [ ] Observe & document existing NFC communications in this initial release  
+- [x] ~~Observe & document existing NFC communications in this initial release~~  
   *~~(Chameleon Ultra did not support ISO 15693)~~*  
   *~~(Proxmark3 expected to arrive by 13 March, 2026...)~~*
 - [ ] Determine whether identical tags share identical NFC data
