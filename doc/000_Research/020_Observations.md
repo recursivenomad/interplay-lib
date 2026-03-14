@@ -28,10 +28,10 @@ hf 15 sim
 As of the initial release from 1 March 2026, for all SMART Tags and SMART Minifigures...
 
 NFC anatomy:
-- NFC standard is ISO/IEC 15693
+- `GN1` NFC standard is ISO/IEC 15693
 
 Metadata:
-- UIDs don't appear more than once
+- `GM1` UIDs don't appear more than once
 
 &nbsp;
 
@@ -42,7 +42,7 @@ Metadata:
 ### Findings:
 
 Analysis:
-- Comparing 3 "lightsaber dual" SMART Tags: *(1 from [75426](https://www.lego.com/product/75426) and 2 from [75427](https://www.lego.com/product/75427))*  
+- `TA1` Comparing 3 "lightsaber dual" SMART Tags: *(1 from [75426](https://www.lego.com/product/75426) and 2 from [75427](https://www.lego.com/product/75427))*  
   All binary data is identical, excluding the UID
 
 &nbsp;
@@ -54,9 +54,9 @@ Analysis:
 ### Findings:
 
 Analysis:
-- Comparing the 2 visually identical "Darth Vader" SMART Minifigures: *(from [75421](https://www.lego.com/product/75421) and [75420](https://www.lego.com/product/75420))*  
+- `MA1` Comparing the 2 visually identical "Darth Vader" SMART Minifigures: *(from [75421](https://www.lego.com/product/75421) and [75420](https://www.lego.com/product/75420))*  
   All binary data is identical, excluding the UID
-- Comparing all 5 "Luke Skywalker" SMART Minifigures, consisting of 4 different visual styles: *(from [75420](https://www.lego.com/product/75420), [75422](https://www.lego.com/product/75422), [75423](https://www.lego.com/product/75423), [75426](https://www.lego.com/product/75426), and [75427](https://www.lego.com/product/75427))*  
+- `MA2` Comparing all 5 "Luke Skywalker" SMART Minifigures, consisting of 4 different visual styles: *(from [75420](https://www.lego.com/product/75420), [75422](https://www.lego.com/product/75422), [75423](https://www.lego.com/product/75423), [75426](https://www.lego.com/product/75426), and [75427](https://www.lego.com/product/75427))*  
   All binary data is identical, excluding the UID
 
 &nbsp;
@@ -66,8 +66,8 @@ Analysis:
 ## Conclusions:
 
 Metadata:
-- Every SMART Tag and SMART Minifigure has its own unique UID
+- Every SMART Tag and SMART Minifigure has its own unique UID `[GM1]`
 
 Analysis:
-- All SMART Tags with identical behaviours contain identical binary data, excluding the UID
-- All SMART Minifigures with identical character identities *(regardless of differing outfits, so far)* contain identical binary data, excluding the UID
+- All SMART Tags with identical behaviours contain identical binary data, excluding the UID `[TA1]`
+- All SMART Minifigures with identical character identities *(regardless of differing outfits, so far)* contain identical binary data, excluding the UID `[MA1]` `[MA2]`
