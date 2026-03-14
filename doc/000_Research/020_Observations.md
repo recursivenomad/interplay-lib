@@ -29,6 +29,16 @@ As of the initial release from 1 March 2026, for all SMART Tags and SMART Minifi
 
 NFC anatomy:
 - `GN1` NFC standard is ISO/IEC 15693
+- `GN2` NFC IC manufacturer is EM Microelectronic-Marin (`0x17`)
+- `GN3` NFC data is accessible as-is (no authentication handshake needed)
+- `GN4` Data is grouped into 66 blocks at 4 bytes per block (264 byte payload)
+
+Payload anatomy:
+- `GP1` The later bytes of each program are all padded with `0x00` through to the final byte, with padding beginning at varying positions and rarely being aligned to the start/end of a data block
+- `GP2` Byte 0 of data block 0 is always `0x00`
+- `GP3` Byte 1 of data block 0 matches the length of the program in bytes (where the program becomes padded with `0x00`)
+- `GP4` Bytes 2 and 3 of data block 0 contain a constant value across all programs
+- `GP5` Byte 0 of data block 1 also contains a constant value across all programs
 
 Metadata:
 - `GM1` UIDs don't appear more than once
@@ -64,6 +74,11 @@ Analysis:
 
 
 ## Conclusions:
+
+Payload anatomy:
+- Bytes 0 and 1 of data block 0 are a 16-bit value representing the program size *(currently theoretically between `0x0000` and `0x0108`?)* `[GP2]` `[GP3]`
+- Bytes 2 and 3 of data block 0 are a constant value `[GP4]`
+- Byte 0 of data block 1 is a constant value `[GP5]`
 
 Metadata:
 - Every SMART Tag and SMART Minifigure has its own unique UID `[GM1]`
