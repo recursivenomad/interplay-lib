@@ -43,6 +43,9 @@ Payload anatomy:
 Metadata:
 - `GM1` UIDs don't appear more than once
 
+Analysis:
+- `GA1` Emulating dumped NFC data bit-for-bit (using any UID) results in identical SMART Brick behaviour
+
 &nbsp;
 
 
@@ -84,5 +87,6 @@ Metadata:
 - Every SMART Tag and SMART Minifigure has its own unique UID `[GM1]`
 
 Analysis:
+- The ISO 15693 static NFC payload itself is the only variable to communicate a program to the SMART Brick `[GN1]` `[GA1]`
 - All SMART Tags with identical behaviours contain identical binary data, excluding the UID `[TA1]`
 - All SMART Minifigures with identical character identities *(regardless of differing outfits, so far)* contain identical binary data, excluding the UID `[MA1]` `[MA2]`
