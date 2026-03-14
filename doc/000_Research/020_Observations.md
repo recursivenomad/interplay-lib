@@ -45,6 +45,9 @@ Metadata:
 
 Analysis:
 - `GA1` Emulating dumped NFC data bit-for-bit (using any UID) results in identical SMART Brick behaviour
+- `GA2` The "Darth Vader" minifigures, the "Emperor Palpatine" minifigure, and the Emperor's Throne tag all trigger at least the opening portion of the "Imperial March" to play on the synthesizer.  
+  Analyzing their aligned payloads using [biodiff](https://github.com/8051Enthusiast/biodiff) on the output of [json-to-bitstream.py](./scripts/json-to-bitstream.py) *(biodiff settings noted in [001_ResearchEnvironment.md](./010_ResearchEnvironment.md))*, I couldn't find any repeating byte patterns common to all 3 payloads.  
+  Repeating analysis by expanding each individual bit to a full byte (`0xFF` or `0x00`) to account for non-byte-aligned programming using [bitstream-as-bytes.py](./scripts/bitstream-as-bytes.py) also showed no repeating bit patterns common to all 3 payloads with the settings I used.
 
 &nbsp;
 
