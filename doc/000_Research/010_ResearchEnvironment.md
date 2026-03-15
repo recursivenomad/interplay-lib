@@ -10,7 +10,7 @@ This research environment consists of:
 - Python 3 for running scripts
 - [biodiff](https://github.com/8051Enthusiast/biodiff) for comparing binary files  
   > *For binary files, I found the following settings helpful for byte pattern recognition:*  
-  > *Global | Gap Open: -4 | Gap Extend: 0 | Mismatch: -1 | Match: 3 | Backend: rustbio*  
+  > *Global | Gap Open: -5 | Gap Extend: 0 | Mismatch: -1 | Match: 4 | Backend: rustbio*  
   > *And for inflated files where each bit inflates to either `0x00` or `0xFF`, these were servicable:*  
   > *Global | Gap Open: -13 | Gap Extend: 0 | Mismatch: -3 | Match: 1 | Backend: rustbio*
 - All initial-release LEGO® SMART Play™ sets: *(released March 1st, 2026)*  

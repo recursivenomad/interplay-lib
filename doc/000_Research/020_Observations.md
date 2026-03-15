@@ -45,8 +45,8 @@ Metadata:
 
 Analysis:
 - `GA1` Emulating dumped NFC data bit-for-bit (using any UID) results in identical SMART Brick behaviour
-- `GA2` The "Darth Vader" minifigures, the "Emperor Palpatine" minifigure, and the Emperor's Throne tag all trigger at least the opening portion of the "Imperial March" to play on the synthesizer.  
-  Analyzing their aligned payloads using [biodiff](https://github.com/8051Enthusiast/biodiff) on the output of [json-to-bitstream.py](./scripts/json-to-bitstream.py) *(biodiff settings noted in [001_ResearchEnvironment.md](./010_ResearchEnvironment.md))*, I couldn't find any repeating byte patterns common to all 3 payloads.  
+- `GA2` The "Darth Vader" minifigures *(from [75421](https://www.lego.com/product/75421) and [75427](https://www.lego.com/product/75427))*, the "Emperor Palpatine" minifigure *([75427](https://www.lego.com/product/75427))*, and the Emperor's Throne tag *([75427](https://www.lego.com/product/75427))* all trigger at least the opening portion of the "Imperial March" to play on the synthesizer.  
+  Analyzing their aligned payloads using [biodiff](https://github.com/8051Enthusiast/biodiff) on the output of [json-to-bitstream.py](./scripts/json-to-bitstream.py) *(biodiff settings noted in [010_ResearchEnvironment.md](./010_ResearchEnvironment.md))*, I couldn't find any repeating byte patterns common to all 3 payloads.  
   Repeating analysis by expanding each individual bit to a full byte (`0xFF` or `0x00`) to account for non-byte-aligned programming using [bitstream-as-bytes.py](./scripts/bitstream-as-bytes.py) also showed no repeating bit patterns common to all 3 payloads with the settings I used.
 
 &nbsp;
@@ -74,6 +74,12 @@ Analysis:
   All binary data is identical, excluding the UID
 - `MA2` Comparing all 5 "Luke Skywalker" SMART Minifigures, consisting of 4 different visual styles: *(from [75420](https://www.lego.com/product/75420), [75422](https://www.lego.com/product/75422), [75423](https://www.lego.com/product/75423), [75426](https://www.lego.com/product/75426), and [75427](https://www.lego.com/product/75427))*  
   All binary data is identical, excluding the UID
+- `MA3` All "Luke Skywalker" minifigures *(see above)*, and the "Princess Leia" *([75423](https://www.lego.com/product/75423))*, "Yoda" *([75422](https://www.lego.com/product/75422))*, and "Obi-Wan Kenobi" *([75425](https://www.lego.com/product/75425))* minifigures all play the "Force Theme" in certain situations (such as entering a vehicle) via the synthesizer.  
+  Analyzing their aligned payloads using [biodiff](https://github.com/8051Enthusiast/biodiff) on the output of [json-to-bitstream.py](./scripts/json-to-bitstream.py) *(biodiff settings noted in [010_ResearchEnvironment.md](./010_ResearchEnvironment.md))*, I couldn't find any repeating byte patterns common between all 4 payloads.  
+  Repeating analysis by expanding each individual bit to a full byte (`0xFF` or `0x00`) to account for non-byte-aligned programming using [bitstream-as-bytes.py](./scripts/bitstream-as-bytes.py) also showed no repeating bit patterns common to all 4 payloads with the settings I used.
+- `MA4` The "Luke Skywalker" minifigures and the "Obi-Wan Kenobi" minifigure *(see above)* have programs of identical size (157 bytes), and by extension also share identical 5-byte payload headers.  
+  Both minifigures use humanoid speech and include code to play the "Force Theme" on the SMART Brick synthesizer.
+  The only difference between them should be subtle pitch changes in their humanoid voice synthesis, yet they share no significant bit- or byte-patterns as mentioned above.
 
 &nbsp;
 
@@ -82,7 +88,7 @@ Analysis:
 ## Conclusions:
 
 Payload anatomy:
-- Bytes 0 and 1 of data block 0 are a 16-bit value representing the program size *(currently theoretically between `0x0000` and `0x0108`?)* `[GP2]` `[GP3]`
+- Bytes 0 and 1 of data block 0 are a 16-bit value representing the program size *(currently theoretically between `0x0005` and `0x0108`?)* `[GP2]` `[GP3]`
 - Bytes 2 and 3 of data block 0 are a constant value `[GP4]`
 - Byte 0 of data block 1 is a constant value `[GP5]`
 
