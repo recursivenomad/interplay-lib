@@ -5,8 +5,10 @@
 This research environment consists of:
 
 - [Proxmark3 RDV4](https://proxgrind.com/prototyping/proxmark3-rdv4-0-development/)
-- Iceman client & firmware *([v4.21128](https://github.com/RfidResearchGroup/proxmark3/tree/v4.21128))*  
+- Iceman firmware *([v4.21128](https://github.com/RfidResearchGroup/proxmark3/tree/v4.21128))*  
   *Built using Debian 12 and per the repository's documentation*
+- Timeout-enabled fork of Iceman client *([v4.21128+hf15timeout](https://github.com/recursivenomad-forks/proxmark3/tree/v4.21128+hf15timeout))*  
+  *Used for iterative scripting automation*
 - Python 3 for running scripts
 - [biodiff](https://github.com/8051Enthusiast/biodiff) for comparing binary files  
   > *For binary files, I found the following settings helpful for byte pattern recognition:*  
