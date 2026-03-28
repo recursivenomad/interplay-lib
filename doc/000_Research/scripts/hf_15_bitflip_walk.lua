@@ -10,6 +10,7 @@
 
 local uid_offset = 0 --bytes
 local uid_size = 8 --bytes
+local uid_variable_size = 4 --bytes
 
 local payload_offset = 175 --bytes
 local payload_size = 264 --bytes
@@ -49,6 +50,8 @@ local function main(args_str)
     local packet_offset
     local packet_size
 
+    math.randomseed(os.time())
+
     for arg in string.gmatch(args_str, "%S+") do
         if (arg == '--help' or arg == '-h') then print("Walks through every bit of a section of an `hf 15 dump`, provided with \"script run hf_15_bitflip_walk.lua <--uid/--payload> <dump.bin>\"") return
         elseif (arg == '--uid' or arg == '-u') then packet_offset = uid_offset; packet_size = uid_size
@@ -82,6 +85,13 @@ local function main(args_str)
         for bit = 0, 7 do
 
             out_bytes[byte] = (src_bytes[byte] ~ (1 << bit))
+
+            -- Set custom UID for payload testing so SMART Brick re-downloads the payload
+            if packet_offset == payload_offset then
+                for i = uid_offset, (uid_variable_size) do
+                    out_bytes[i+1] = math.random(0x00, 0xFF)
+                end
+            end
 
             io.write(string.format("\nByte %i, bit %i: %02X (%s) -> %02X (%s):\n", byte-1, bit, src_bytes[byte], byte_string(src_bytes[byte]), out_bytes[byte], byte_string(out_bytes[byte])))
 

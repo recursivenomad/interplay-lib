@@ -52,6 +52,7 @@ Analysis:
 - `GA3` Modifying the 8th byte (LSB-first - `0xE0`) of the UID by running [`hf_15_bitflip_walk.lua --uid`](./scripts/hf_15_bitflip_walk.lua) results in the SMART Brick refusing to respond.  
   Modifying any of the other 7 bytes of the UID ***DID NOT*** impact the SMART Brick's response!  
   *(Tested on the program for a "lightsaber dual" tag from [75427](https://www.lego.com/product/75427))*
+- `GA4` The SMART Brick regularly checks nearby UIDs, and will download the NFC payload if a new UID is presented
 
 &nbsp;
 
@@ -104,3 +105,4 @@ Analysis:
 - The ISO 15693 static NFC payload itself is the only variable to communicate a program to the SMART Brick `[GN1]` `[GA1]`
 - All SMART Tags with identical behaviours contain identical binary data, excluding the UID `[TA1]`
 - All SMART Minifigures with identical character identities *(regardless of differing outfits, so far)* contain identical binary data, excluding the UID `[MA1]` `[MA2]`
+- In order to get the SMART Brick to download a new payload, the UID must change `[GA4]`
