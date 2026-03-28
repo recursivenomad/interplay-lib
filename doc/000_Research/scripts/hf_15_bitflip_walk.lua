@@ -72,6 +72,13 @@ local function main(args_str)
 
     for byte = (packet_offset + 1), (packet_offset + packet_size) do
 
+        -- Confirm SMART Brick status every 20 bytes during payload testing (approx. every 5 minutes):
+        if (packet_offset == payload_offset) and (((byte-1) % 20) == 0) then
+            -- Send unmodified source to confirm SMART Brick is still responding
+            io.write(string.format("\nByte %i validation test: 0x%02X\n", byte-1, src_bytes[byte]))
+            sim(src_bytes, 4000)
+        end
+
         for bit = 0, 7 do
 
             out_bytes[byte] = (src_bytes[byte] ~ (1 << bit))
