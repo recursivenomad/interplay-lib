@@ -26,6 +26,22 @@ end
 
 
 
+local function sim(packet, timeout)
+
+    local temp_sim_file = io.open("temp_sim.bin", "wb")
+    temp_sim_file:write(string.char(table.unpack(packet)))
+    temp_sim_file:close()
+
+    core.console('hf 15 eload --file temp_sim.bin')
+    core.console(string.format('hf 15 sim --timeout %i', timeout))
+
+    -- Debug reader activity:
+    core.console('hf 15 list')
+
+end
+
+
+
 local function main(args_str)
 
     local args = {}
@@ -51,6 +67,9 @@ local function main(args_str)
     local src_bytes = { src_data:byte(1,-1) }
     local out_bytes = { src_data:byte(1,-1) }
 
+    io.write("\nConfirming SMART Brick is active...\n")
+    sim(src_bytes, 4000)
+
     for byte = (packet_offset + 1), (packet_offset + packet_size) do
 
         for bit = 0, 7 do
@@ -59,12 +78,13 @@ local function main(args_str)
 
             io.write(string.format("\nByte %i, bit %i: %02X (%s) -> %02X (%s):\n", byte-1, bit, src_bytes[byte], byte_string(src_bytes[byte]), out_bytes[byte], byte_string(out_bytes[byte])))
 
+            -- I experienced more latency when this was a function call, so we inline it instead
             local temp_sim_file = io.open("temp_sim.bin", "wb")
             temp_sim_file:write(string.char(table.unpack(out_bytes)))
             temp_sim_file:close()
 
             core.console('hf 15 eload --file temp_sim.bin')
-            core.console('hf 15 sim')
+            core.console('hf 15 sim --timeout 1500')
 
             -- Debug reader activity:
             core.console('hf 15 list')
