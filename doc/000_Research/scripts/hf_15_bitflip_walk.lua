@@ -107,6 +107,10 @@ local function main(args_str)
             core.console('hf 15 list')
 
         end
+
+        -- Reset byte to original before continuing the walk
+        out_bytes[byte] = src_bytes[byte]
+
         -- Debug source payload:
         --io.write(string.format('%02X ', src_bytes[byte]))
     end
