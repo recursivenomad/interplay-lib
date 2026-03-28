@@ -7,7 +7,7 @@ This research environment consists of:
 - [Proxmark3 RDV4](https://proxgrind.com/prototyping/proxmark3-rdv4-0-development/)
 - Iceman firmware *([v4.21128](https://github.com/RfidResearchGroup/proxmark3/tree/v4.21128))*  
   *Built using Debian 12 and per the repository's documentation*
-- Timeout-enabled commit on top of Iceman client v4.21128 *([commit 422b3b7](https://github.com/RfidResearchGroup/proxmark3/tree/422b3b7))*  
+- Iceman client with timeout-enabled commit on top of v4.21128 *([commit 422b3b7](https://github.com/RfidResearchGroup/proxmark3/tree/422b3b7))*  
   *Used for iterative scripting automation*
 - Python 3 for running scripts
 - [biodiff](https://github.com/8051Enthusiast/biodiff) for comparing binary files  
