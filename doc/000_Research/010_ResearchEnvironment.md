@@ -15,8 +15,21 @@ This research environment consists of:
   > *Global | Gap Open: -5 | Gap Extend: 0 | Mismatch: -1 | Match: 4 | Backend: rustbio*  
   > *And for inflated files where each bit inflates to either `0x00` or `0xFF`, these were servicable:*  
   > *Global | Gap Open: -13 | Gap Extend: 0 | Mismatch: -3 | Match: 1 | Backend: rustbio*
+- USB webcam for capturing SMART Brick LED responses
+- `obs-studio` for easy adjustment of webcam settings
+- `ffmpeg` for automated testing
 - All initial-release LEGO® SMART Play™ sets: *(released March 1st, 2026)*  
   [75420](https://www.lego.com/product/75420) | [75421](https://www.lego.com/product/75421) | [75422](https://www.lego.com/product/75422) | [75423](https://www.lego.com/product/75423) | [75424](https://www.lego.com/product/75424) | [75425](https://www.lego.com/product/75425) | [75426](https://www.lego.com/product/75426) | [75427](https://www.lego.com/product/75427)
+
+
+
+## Analysis Setup
+
+- Build and install Proxmark 3 client and firmware
+- Attach the webcam and Proxmark 3 to your machine
+- Ensure your webcam settings disable any automatic adjustments, and set your exposure to the minimum value
+
+
 
 
 

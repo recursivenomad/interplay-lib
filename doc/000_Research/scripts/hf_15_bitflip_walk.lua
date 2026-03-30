@@ -15,6 +15,13 @@ local uid_variable_size = 4 --bytes
 local payload_offset = 175 --bytes
 local payload_size = 264 --bytes
 
+local brightness_threshold = 40
+
+
+
+local video_pipe
+local brightness_log_pos = 0
+
 
 
 local function byte_string(num)
@@ -38,6 +45,32 @@ local function sim(packet, timeout)
 
     -- Debug reader activity:
     core.console('hf 15 list')
+
+end
+
+
+
+local function check_for_response()
+
+    local brightness_peak = 0
+    local brightness_file = io.open("temp_brightness.log", "r")
+    brightness_file:seek("set", brightness_log_pos)
+    while true do
+    	local value = tonumber(brightness_file:read("*line"))
+        if not value then break end
+        if (value > brightness_peak) then brightness_peak = value end
+    end
+    brightness_log_pos = brightness_file:seek()
+    io.close(brightness_file)
+
+    print("\nBrick stats:")
+    print(string.format("Brightness peak:  %i", brightness_peak))
+
+    if (brightness_peak >= brightness_threshold) then
+        return true
+    end
+
+    return false
 
 end
 
@@ -67,11 +100,16 @@ local function main(args_str)
     local src_data = file:read("*all")
     file:close()
 
+    video_pipe = io.popen("stdbuf -oL ffmpeg -f v4l2 -i /dev/video2 -vf \"signalstats,metadata=print:key=lavfi.signalstats.YMAX\" -f null - 2>&1 | stdbuf -oL sed -n 's/.*YMAX=\\([0-9]*\\).*/\\1/p' > temp_brightness.log &")
+
     local src_bytes = { src_data:byte(1,-1) }
     local out_bytes = { src_data:byte(1,-1) }
 
     io.write("\nConfirming SMART Brick is active...\n")
     sim(src_bytes, 4000)
+    local has_response = check_for_response()
+    if not has_response then print("SMART Brick did not respond at initial check-in - aborting") return
+    else print("Response is good, continuing") end
 
     for byte = (packet_offset + 1), (packet_offset + packet_size) do
 
@@ -80,6 +118,9 @@ local function main(args_str)
             -- Send unmodified source to confirm SMART Brick is still responding
             io.write(string.format("\nByte %i validation test: 0x%02X\n", byte-1, src_bytes[byte]))
             sim(src_bytes, 4000)
+            local has_response = check_for_response()
+            if not has_response then print(string.format("SMART Brick did not respond at byte %i check-in - aborting", byte)) return
+            else print("Response is good, continuing") end
         end
 
         for bit = 0, 7 do
@@ -105,6 +146,8 @@ local function main(args_str)
 
             -- Debug reader activity:
             core.console('hf 15 list')
+
+            local has_response = check_for_response()
 
         end
 
