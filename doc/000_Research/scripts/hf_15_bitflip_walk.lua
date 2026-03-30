@@ -162,4 +162,8 @@ end
 
 
 
+-- Clean up any existing zombie processes
+os.execute("killall ffmpeg")
 main(args)
+video_pipe:close()
+os.execute("killall ffmpeg")
