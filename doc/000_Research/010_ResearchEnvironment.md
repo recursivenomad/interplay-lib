@@ -16,6 +16,7 @@ This research environment consists of:
   > *And for inflated files where each bit inflates to either `0x00` or `0xFF`, these were servicable:*  
   > *Global | Gap Open: -13 | Gap Extend: 0 | Mismatch: -3 | Match: 1 | Backend: rustbio*
 - USB webcam for capturing SMART Brick LED responses
+- Generic piezo-electric guitar pickup attached to SMART Brick for isolated auditory testing
 - `obs-studio` for easy adjustment of webcam settings
 - `ffmpeg` for automated testing
 - All initial-release LEGO® SMART Play™ sets: *(released March 1st, 2026)*  
@@ -26,8 +27,9 @@ This research environment consists of:
 ## Analysis Setup
 
 - Build and install Proxmark 3 client and firmware
-- Attach the webcam and Proxmark 3 to your machine
+- Attach the webcam, piezo-electric pickup, and Proxmark 3 to your machine
 - Ensure your webcam settings disable any automatic adjustments, and set your exposure to the minimum value
+- Ensure your system microphone is set to the piezo-electric pickup
 
 
 

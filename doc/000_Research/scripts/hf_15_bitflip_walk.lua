@@ -16,11 +16,14 @@ local payload_offset = 175 --bytes
 local payload_size = 264 --bytes
 
 local brightness_threshold = 40
+local loudness_threshold = -15
 
 
 
 local video_pipe
+local audio_pipe
 local brightness_log_pos = 0
+local loudness_log_pos = 0
 
 
 
@@ -63,10 +66,22 @@ local function check_for_response()
     brightness_log_pos = brightness_file:seek()
     io.close(brightness_file)
 
+    local loudness_peak = -100
+    local loudness_file = io.open("temp_loudness.log", "r")
+    loudness_file:seek("set", loudness_log_pos)
+    while true do
+    	local value = tonumber(loudness_file:read("*line"))
+        if not value then break end
+        if (value > loudness_peak) then loudness_peak = value end
+    end
+    loudness_log_pos = loudness_file:seek()
+    io.close(loudness_file)
+
     print("\nBrick stats:")
     print(string.format("Brightness peak:  %i", brightness_peak))
+    print(string.format("     Audio peak:  %i", loudness_peak))
 
-    if (brightness_peak >= brightness_threshold) then
+    if ((brightness_peak >= brightness_threshold) or (loudness_peak >= loudness_threshold)) then
         return true
     end
 
@@ -101,6 +116,7 @@ local function main(args_str)
     file:close()
 
     video_pipe = io.popen("stdbuf -oL ffmpeg -f v4l2 -i /dev/video2 -vf \"signalstats,metadata=print:key=lavfi.signalstats.YMAX\" -f null - 2>&1 | stdbuf -oL sed -n 's/.*YMAX=\\([0-9]*\\).*/\\1/p' > temp_brightness.log &")
+    audio_pipe = io.popen("stdbuf -oL ffmpeg -f alsa -i default -af \"asetnsamples=4410,astats=metadata=1:reset=1,ametadata=print:key=lavfi.astats.Overall.Peak_level:direct=1\" -f null - 2>&1 | stdbuf -oL sed -n 's/.*Peak_level=\\(-\\?[0-9]*\\).*/\\1/p' > temp_loudness.log &")
 
     local src_bytes = { src_data:byte(1,-1) }
     local out_bytes = { src_data:byte(1,-1) }
@@ -166,4 +182,5 @@ end
 os.execute("killall ffmpeg")
 main(args)
 video_pipe:close()
+audio_pipe:close()
 os.execute("killall ffmpeg")
