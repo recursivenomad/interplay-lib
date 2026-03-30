@@ -6,6 +6,9 @@
 
 -- Walks through every bit of a section of an `hf 15 dump`, provided with "script run hf_15_bitflip_walk.lua <--uid/--payload> <dump.bin>"
 
+-- Make sure you webcam's automatic adjustments are disabled, and exposure is at minimum
+-- Make sure you default audio input device is the piezo-electric pickup
+-- Adjust the 2 threshold settings below accordingly
 
 
 local uid_offset = 0 --bytes
@@ -15,8 +18,9 @@ local uid_variable_size = 4 --bytes
 local payload_offset = 175 --bytes
 local payload_size = 264 --bytes
 
-local brightness_threshold = 40
-local loudness_threshold = -15
+-- Tweak these to accommodate your hardware
+local brightness_threshold = 40 --0-255
+local loudness_threshold = -15 --dB
 
 
 
@@ -93,7 +97,6 @@ end
 
 local function main(args_str)
 
-    local args = {}
     local filename
     local packet_offset
     local packet_size

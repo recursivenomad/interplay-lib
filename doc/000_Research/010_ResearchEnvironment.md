@@ -18,7 +18,7 @@ This research environment consists of:
 - USB webcam for capturing SMART Brick LED responses
 - Generic piezo-electric guitar pickup attached to SMART Brick for isolated auditory testing
 - `obs-studio` for easy adjustment of webcam settings
-- `ffmpeg` for automated testing
+- `ffmpeg` for automated audiovisual testing *(leverages webcam video signal and line-in audio signal for automated capture of SMART Brick responses)*
 - All initial-release LEGO® SMART Play™ sets: *(released March 1st, 2026)*  
   [75420](https://www.lego.com/product/75420) | [75421](https://www.lego.com/product/75421) | [75422](https://www.lego.com/product/75422) | [75423](https://www.lego.com/product/75423) | [75424](https://www.lego.com/product/75424) | [75425](https://www.lego.com/product/75425) | [75426](https://www.lego.com/product/75426) | [75427](https://www.lego.com/product/75427)
 
