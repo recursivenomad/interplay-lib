@@ -10,6 +10,8 @@
 -- Make sure you default audio input device is the piezo-electric pickup
 -- Adjust the 2 threshold settings below accordingly
 
+-- This script is messy, but it works :^)
+
 
 local uid_offset = 0 --bytes
 local uid_size = 8 --bytes
@@ -100,6 +102,13 @@ local function check_for_response(check_type)
     else
 
         if ((brightness_peak >= brightness_threshold) or (loudness_peak >= loudness_threshold)) then
+            local response_log = io.open("response_bitflip_walk.log", "a")
+            response_log:write("====================================\n")
+            response_log:write(os.date(), "\n")
+            response_log:write("\n")
+            response_log:write(string.format("Brightness peak:  %i  (threshold %i)\n", brightness_peak, brightness_threshold))
+            response_log:write(string.format("  Loudness peak:  %i  (threshold %i)\n", loudness_peak, loudness_threshold))
+            io.close(response_log)
             return true
         end
 
@@ -184,10 +193,19 @@ local function main(args_str)
 
             local has_response = check_for_response()
             if has_response then
+
                 print("\n\n ! ! ! ! !\n")
                 print("RESPONSE DETECTED!")
                 print("\n ! ! ! ! !\n\n")
                 print("See above information for more details\n\n")
+
+                local response_log = io.open("response_bitflip_walk.log", "a")
+                response_log:write("\n")
+                response_log:write(string.format("Near byte %i, bit %i: %02X (%s) -> %02X (%s)\n", byte-1, bit, src_bytes[byte], byte_string(src_bytes[byte]), out_bytes[byte], byte_string(out_bytes[byte])))
+                response_log:write("\n", args_str, "\n")
+                response_log:write("====================================\n\n\n")
+                io.close(response_log)
+
             end
 
         end
