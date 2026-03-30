@@ -24,6 +24,10 @@ local loudness_threshold = -15 --dB
 
 
 
+local type_validation_check = 1
+
+
+
 local video_pipe
 local audio_pipe
 local brightness_log_pos = 0
@@ -57,7 +61,9 @@ end
 
 
 
-local function check_for_response()
+local function check_for_response(check_type)
+
+    check_type = check_type or 0
 
     local brightness_peak = 0
     local brightness_file = io.open("temp_brightness.log", "r")
@@ -85,8 +91,18 @@ local function check_for_response()
     print(string.format("Brightness peak:  %i", brightness_peak))
     print(string.format("     Audio peak:  %i", loudness_peak))
 
-    if ((brightness_peak >= brightness_threshold) or (loudness_peak >= loudness_threshold)) then
-        return true
+    if (check_type == type_validation_check) then
+
+        if ((brightness_peak >= brightness_threshold) and (loudness_peak >= loudness_threshold)) then
+            return true
+        end
+
+    else
+
+        if ((brightness_peak >= brightness_threshold) or (loudness_peak >= loudness_threshold)) then
+            return true
+        end
+
     end
 
     return false
@@ -126,7 +142,7 @@ local function main(args_str)
 
     io.write("\nConfirming SMART Brick is active...\n")
     sim(src_bytes, 4000)
-    local has_response = check_for_response()
+    local has_response = check_for_response(type_validation_check)
     if not has_response then print("SMART Brick did not respond at initial check-in - aborting") return
     else print("Response is good, continuing") end
 
@@ -137,7 +153,7 @@ local function main(args_str)
             -- Send unmodified source to confirm SMART Brick is still responding
             io.write(string.format("\nByte %i validation test: 0x%02X\n", byte-1, src_bytes[byte]))
             sim(src_bytes, 4000)
-            local has_response = check_for_response()
+            local has_response = check_for_response(type_validation_check)
             if not has_response then print(string.format("SMART Brick did not respond at byte %i check-in - aborting", byte)) return
             else print("Response is good, continuing") end
         end
@@ -167,6 +183,12 @@ local function main(args_str)
             core.console('hf 15 list')
 
             local has_response = check_for_response()
+            if has_response then
+                print("\n\n ! ! ! ! !\n")
+                print("RESPONSE DETECTED!")
+                print("\n ! ! ! ! !\n\n")
+                print("See above information for more details\n\n")
+            end
 
         end
 
