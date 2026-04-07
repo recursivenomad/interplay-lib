@@ -163,7 +163,7 @@ local function main(args_str)
             io.write(string.format("\nByte %i validation test: 0x%02X\n", byte-1, src_bytes[byte]))
             sim(src_bytes, 4000)
             local has_response = check_for_response(type_validation_check)
-            if not has_response then print(string.format("SMART Brick did not respond at byte %i check-in - aborting", byte)) return
+            if not has_response then print(string.format("SMART Brick did not respond at byte %i check-in - aborting", byte-1)) return
             else print("Response is good, continuing") end
         end
 
