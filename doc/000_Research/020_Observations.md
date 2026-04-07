@@ -112,3 +112,11 @@ Analysis:
 - All SMART Minifigures with identical character identities *(regardless of differing outfits, so far)* contain identical binary data, excluding the UID `[MA1]` `[MA2]`
 - In order to get the SMART Brick to download a new payload, the UID must change `[GA4]`
 - The SMART Brick is only sensitive to changes in the program region; it does not check against changes made to the non-programmatic `0x00` padded region `[GA5]` `[GA6]`
+
+Encryption:
+- There is no NFC-based authentication `[GN3]` `[GA1]`
+- Payloads which (should) share partially-identical programs do not share any significant bitstreams `[GA2]` `[MA3]` `[MA4]`
+- There is likely static encryption/validation/encoding on the payload itself at the time of programming `[GA2]` `[GA5]` `[MA3]` `[MA4]`
+- UID is not used as a static nonce/seed `[GM1]` `[GA1]` `[GA2]` `[GA3]` `[TA1]` `[MA1]` `[MA2]`
+- Encryption length varies per-payload `[GP1]` `[GA5]` `[GA6]`
+- The varying encryption length is not bounded by block boundaries `[GP1]`
