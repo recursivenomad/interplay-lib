@@ -53,6 +53,11 @@ Analysis:
   Modifying any of the other 7 bytes of the UID ***DID NOT*** impact the SMART Brick's response!  
   *(Tested on the program for a "lightsaber dual" tag from [75427](https://www.lego.com/product/75427))*
 - `GA4` The SMART Brick regularly checks nearby UIDs, and will download the NFC payload if a new UID is presented
+- `GA5` Modifying *any* single bit of the program portion of a payload results in the SMART Brick refusing to respond in any measured way  
+  *(Tested on programs for the "Obi-Wan Kenobi" minifigure from [75425](https://www.lego.com/en-us/product/75425) as well as a "lightsaber dual" tag from [75427](https://www.lego.com/product/75427) or [75426](https://www.lego.com/product/75426))*
+- `GA6` Modifying any bits of the `0x00` padding ***DID NOT*** impact the SMART Brick's response!  
+  *ie. the SMART Brick will respond to a tag/minifigure program regardless of what data is in the padding region*
+- `GA7` I have noticed that sometimes the SMART Brick becomes less responsive to UID changes, specifically noted when testing a "lightsaber dual" tag with [`hf_15_bitflip_walk.lua --payload`](./scripts/hf_15_bitflip_walk.lua).  In this state, the SMART Brick starts to sometimes (but not always) skip responding to every-other UID change.  Restarting the script multiple times eventually results in expected behaviour.
 
 &nbsp;
 
@@ -106,3 +111,4 @@ Analysis:
 - All SMART Tags with identical behaviours contain identical binary data, excluding the UID `[TA1]`
 - All SMART Minifigures with identical character identities *(regardless of differing outfits, so far)* contain identical binary data, excluding the UID `[MA1]` `[MA2]`
 - In order to get the SMART Brick to download a new payload, the UID must change `[GA4]`
+- The SMART Brick is only sensitive to changes in the program region; it does not check against changes made to the non-programmatic `0x00` padded region `[GA5]` `[GA6]`
